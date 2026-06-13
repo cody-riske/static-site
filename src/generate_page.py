@@ -39,8 +39,8 @@ def generate_page(
         template_content = f.read()
 
     # 4. Convert markdown to HTML string
-    html_node = markdown_to_blocks(markdown_content)
-    html_content = html_node.to_html()
+    node = markdown_to_blocks(markdown_content)
+    html_content = node.to_html()
 
     # 5. Extract the page title
     page_title = extract_title(markdown_content)
