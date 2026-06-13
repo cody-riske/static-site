@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from textnode import TextNode, TextType
 from copystatic import copy_directory_recursive
@@ -9,8 +10,12 @@ dir_path_static = "./static"
 dir_path_public = "./public"
 dir_path_content = "./content"
 template_path = "./template.html"
+default_basepath = "/"
 
 def main() -> None:
+    basepath = default_basepath
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
     print("Copying static files to public directory...")
     # This automatically cleans and recreates public/ inside your custom implementation
     copy_directory_recursive(dir_path_static, dir_path_public)
@@ -20,7 +25,8 @@ def main() -> None:
     generate_pages_recursive(
         dir_path_content,
         template_path,
-        dir_path_public
+        dir_path_public,
+        basepath
     )
     
     print("Static site generation complete!")
