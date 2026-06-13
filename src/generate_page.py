@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from markdown_blocks import markdown_to_html_node
+from markdown_blocks import markdown_to_blocks
 
 def extract_title(markdown: str) -> str:
     """
@@ -39,7 +39,7 @@ def generate_page(
         template_content = f.read()
 
     # 4. Convert markdown to HTML string
-    html_node = markdown_to_html_node(markdown_content)
+    html_node = markdown_to_blocks(markdown_content)
     html_content = html_node.to_html()
 
     # 5. Extract the page title
