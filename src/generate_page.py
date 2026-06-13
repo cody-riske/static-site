@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-from markdown_blocks import markdown_to_blocks
+# FIXED: Changed import path to target the correct file 'markdown_to_html_node.py'
+from markdown_to_html_node import markdown_to_html_node
 
 def extract_title(markdown: str) -> str:
     """
@@ -39,8 +40,9 @@ def generate_page(
         template_content = f.read()
 
     # 4. Convert markdown to HTML string
-    node = markdown_to_blocks(markdown_content)
-    html_content = node.to_html()
+    # This securely invokes your custom ParentNode wrapper mapping logic
+    html_node = markdown_to_html_node(markdown_content)
+    html_content = html_node.to_html()
 
     # 5. Extract the page title
     page_title = extract_title(markdown_content)
